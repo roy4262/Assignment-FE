@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* Global variables */
+:root {
+    color-scheme: light dark;
+}
+
+html,
+body,
+#__next {
+    height: 100%;
+}
+
+/* Background and base typography with dark mode */
+body {
+    @apply bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-900 antialiased dark:from-slate-900 dark:via-slate-950 dark:to-black dark:text-slate-100;
+}
+
+/* Table tweaks with dark mode */
+.table-container {
+    @apply rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden dark:border-slate-700 dark:bg-slate-800/70;
+}
