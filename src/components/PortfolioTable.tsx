@@ -17,10 +17,13 @@ function isNAString(s: string) {
   const t = s.trim().toLowerCase();
   return t === "na" || t === "n/a" || t === "n.a" || t === "n.a.";
 }
-function asDash(v: unknown) {
+function asDash(v: string | number | null | undefined): string | number {
   if (v == null) return "-";
-  if (typeof v === "string" && isNAString(v)) return "-";
-  return v as any;
+  if (typeof v === "string") {
+    return isNAString(v) ? "-" : v;
+  }
+  if (typeof v === "number" && Number.isFinite(v)) return v;
+  return "-";
 }
 
 // Category mapping (derived in frontend)
@@ -94,7 +97,8 @@ function groupByCategory(rows: HoldingRow[]) {
 
 export default function PortfolioTable() {
   const { data, error, isLoading } = useHoldings();
-  const rows = data?.holdings ?? [];
+  const holdings = data?.holdings;
+  const rows = useMemo(() => holdings ?? [], [holdings]);
 
   const groups = useMemo(() => groupByCategory(rows), [rows]);
   const totalPV = useMemo(
@@ -193,7 +197,6 @@ function SectorBlock({
   sector,
   group,
   totalPV,
-
 }: {
   sector: string;
   group: {
