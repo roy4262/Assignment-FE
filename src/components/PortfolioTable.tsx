@@ -193,9 +193,7 @@ function SectorBlock({
   sector,
   group,
   totalPV,
-  onDragStart,
-  onDragOver,
-  onDrop,
+
 }: {
   sector: string;
   group: {
