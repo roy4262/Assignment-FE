@@ -29,6 +29,7 @@ npm start
 ```
 
 - App: http://localhost:3000
+- Live: https://assignment-fe-w753.vercel.app/
 
 ## 📁 Key Files
 
